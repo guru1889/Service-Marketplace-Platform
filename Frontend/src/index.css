@@ -1,0 +1,42 @@
+.navigation {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  list-style: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  padding: 5px 10px;
+}
+
+.nav-link:hover {
+  color: #0d6efd;
+}
+
+.nav-link.active {
+  color: #0d6efd;
+  border-bottom: 3px solid #0d6efd;
+}
+
+.logo {
+  color: #ff8c00;
+}
+
+.logo-blue {
+  color: blue;
+}
+.filtert{
+  height: 50px;
+}
+.cursor{
+  cursor: pointer;
+}
+.cursor p{
+  font-size: 20px;
+}

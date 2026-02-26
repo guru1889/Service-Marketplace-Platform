@@ -1,0 +1,63 @@
+.booking-card {
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: none;
+}
+
+.react-datepicker {
+  border-radius: 12px !important;
+  border: none !important;
+  font-family: inherit;
+}
+
+.react-datepicker__header {
+  background-color: #0d6efd;
+  border-bottom: none;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  color: white;
+  font-weight: 600;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__time-list-item--selected {
+  background-color: #0d6efd !important;
+  border-radius: 8px !important;
+}
+
+.react-datepicker__day:hover,
+.react-datepicker__time-list-item:hover {
+  background-color: #e7f1ff !important;
+  border-radius: 8px;
+}
+
+
+--------------------------------------------
+.slot-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.slot-btn {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #0d6efd;
+  background: white;
+  cursor: pointer;
+}
+
+.slot-btn.selected {
+  background: #0d6efd;
+  color: white;
+}
+
+.slot-btn.booked {
+  background: #ccc;
+  cursor: not-allowed;
+}

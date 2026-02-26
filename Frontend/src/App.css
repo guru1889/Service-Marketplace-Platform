@@ -1,0 +1,18 @@
+.navigation li{
+    list-style: none;
+    cursor: pointer;
+    font-size: 18px; 
+}
+.active{
+    font-weight: bold;
+}
+.body{
+    background-color: rgb(248, 245, 245);
+    padding-top: 30px;
+}
+.about{
+    margin-top: 90px;
+}
+.nav-item{
+    text-decoration: none;
+}
