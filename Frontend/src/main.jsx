@@ -45,20 +45,19 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-{
-  path: "admindashboard",
-  element: <ProtectedRoute />,   // wrapper route
-  children: [
     {
-      element: <AdminPgage />,   // layout route
+      path: "admindashboard",
+      element: (
+        <ProtectedRoute>
+          <AdminPgage />
+        </ProtectedRoute>
+      ),
       children: [
         { index: true, element: <Navigate to="stats" /> },
         { path: "stats", element: <Stats /> },
         { path: "providerapproval", element: <ProviderApproval /> }
       ]
-    }
-  ]
-},
+    },
       {
         path: "service",
         element: (
