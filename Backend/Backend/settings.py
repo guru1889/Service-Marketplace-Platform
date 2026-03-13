@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY
-SECRET_KEY = 'django-insecure-change-this-key'
+SECRET_KEY = "localserviceproviderprojectverysecuresecretkey2026"
 
 DEBUG = True
 
@@ -67,29 +67,18 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 # DATABASE (Railway MySQL)
 # DATABASE
 
-if os.getenv("MYSQLHOST"):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.getenv("MYSQLDATABASE"),
-            'USER': os.getenv("MYSQLUSER"),
-            'PASSWORD': os.getenv("MYSQLPASSWORD"),
-            'HOST': os.getenv("MYSQLHOST"),
-            'PORT': os.getenv("MYSQLPORT"),
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'localservice_provider',
-            'USER': 'root',
-            'PASSWORD': 'Guru@1234',
-            'HOST': 'localhost',
-            'PORT': '3306',
-        }
-    }
+import dj_database_url
 
+DATABASES = {
+ 'default': {
+     'ENGINE': 'django.db.backends.postgresql',
+     'NAME': 'localservice_provider',
+     'USER': 'postgres',
+     'PASSWORD': '1234',
+     'HOST': 'localhost',
+     'PORT': '5432',
+ }
+}
 
 # PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [

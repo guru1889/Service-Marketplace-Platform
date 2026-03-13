@@ -50,31 +50,37 @@ class ProfileSerializer(ModelSerializer):
 
 
 class ProviderRegistrationSerializer(serializers.Serializer):
+
     username = serializers.CharField()
     email = serializers.EmailField(allow_blank=True)
-    
+
     password = serializers.CharField(write_only=True, min_length=6)
     confirmpassword = serializers.CharField(write_only=True)
 
     phone_number = serializers.CharField()
     address = serializers.CharField(required=False, allow_blank=True)
+
     image = serializers.ImageField(required=False)
+
     category = serializers.CharField()
     location = serializers.CharField()
+
     salary = serializers.CharField(required=False, allow_blank=True)
 
-
+    # username validation
     def validate_username(self, value):
         if User.objects.filter(username=value).exists():
             raise serializers.ValidationError("Username already exists")
         return value
 
+    # category validation
     def validate_category(self, value):
         value = value.strip()
         if not Services.objects.filter(category__iexact=value).exists():
             raise serializers.ValidationError("Invalid service category")
         return value
 
+    # password validation
     def validate(self, data):
         if data["password"] != data["confirmpassword"]:
             raise serializers.ValidationError({
@@ -84,6 +90,7 @@ class ProviderRegistrationSerializer(serializers.Serializer):
 
     @transaction.atomic
     def create(self, validated_data):
+
         validated_data.pop("confirmpassword")
 
         service = Services.objects.filter(
@@ -94,17 +101,20 @@ class ProviderRegistrationSerializer(serializers.Serializer):
             raise serializers.ValidationError({
                 "category": "Invalid service category"
             })
+
         salary = validated_data.get("salary")
 
         if not salary or salary.strip() == "":
-            validated_data["salary"] = "Based on Work"
+            salary = "Based on Work"
 
+        # create user
         user = User.objects.create_user(
             username=validated_data["username"],
             email=validated_data["email"],
             password=validated_data["password"]
         )
 
+        # create profile
         UserProfile.objects.create(
             user=user,
             role="service_provider",
@@ -112,17 +122,24 @@ class ProviderRegistrationSerializer(serializers.Serializer):
             address=validated_data.get("address", "")
         )
 
-        Provider.objects.create(
-            provider=user,
-            service=service,
-            image=validated_data.get('image'),
-            location=validated_data["location"],
-            salary=validated_data.get("salary", ""),
-            approved=False
-        )
+        # prepare provider data
+        provider_data = {
+            "provider": user,
+            "service": service,
+            "location": validated_data["location"],
+            "salary": salary,
+            "approved": False
+        }
+
+        # add image only if provided
+        image = validated_data.get("image")
+
+        if image:
+            provider_data["image"] = image
+
+        Provider.objects.create(**provider_data)
 
         return user
-
 
 class BookingSerializer(serializers.ModelSerializer):
 
