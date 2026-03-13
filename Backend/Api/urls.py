@@ -27,4 +27,6 @@ urlpatterns = [
     path('admindashboardstats',views.Admindashboardstats),
     path('providerunavilability',views.provider_unavailability),
     path("get-provider-unavailable-dates/<int:provider_id>/",views.get_provider_unavailable_dates),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
