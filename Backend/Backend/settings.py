@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = "localserviceproviderprojectverysecuresecretkey2026"
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -70,14 +70,9 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 import dj_database_url
 
 DATABASES = {
- 'default': {
-     'ENGINE': 'django.db.backends.postgresql',
-     'NAME': 'localservice_provider',
-     'USER': 'postgres',
-     'PASSWORD': '1234',
-     'HOST': 'localhost',
-     'PORT': '5432',
- }
+    'default': dj_database_url.config(
+        default=os.environ.get("DATABASE_URL")
+    )
 }
 
 # PASSWORD VALIDATION
