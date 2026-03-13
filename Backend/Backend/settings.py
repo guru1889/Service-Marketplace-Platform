@@ -10,8 +10,11 @@ SECRET_KEY = "localserviceproviderprojectverysecuresecretkey2026"
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = [
+    "local-service-platform-808d.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
 
 # APPLICATIONS
 INSTALLED_APPS = [
@@ -104,7 +107,8 @@ USE_TZ = True
 
 # STATIC FILES
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # MEDIA FILES
