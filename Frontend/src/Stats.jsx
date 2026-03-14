@@ -10,7 +10,7 @@ function Stats() {
         .catch(err=>console.log(err.data))
     },[])
   return (
-    <div className='admin stats p-3 card admindashboard nav' style={{height:'80vh',marginTop:'-18px'}}>
+    <div className='admin stats p-3 card admindashboard nav' style={{height:'80vh',marginTop:'-18px',overflow:"hidden"}}>
      {
        stats ? (
         <div className='d-flex flex-wrap gap-2'>
