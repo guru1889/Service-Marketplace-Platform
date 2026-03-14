@@ -15,7 +15,7 @@ function ProviderApproval() {
         .catch(err => console.log(err.response?.data || "Error"));
     }
   return (
-    <div className='admin provider_approval card p-3 ' style={{height:'80vh',marginTop:'-18px'}}>
+    <div className='admin provider_approval card p-3 ' style={{height:'80vh',marginTop:'-18px',overflow:"scroll"}}>
         <div >
             <div className='d-flex flex-wrap gap-5'>
                 {unapprovedprovider.map((data)=>(
