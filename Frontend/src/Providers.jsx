@@ -39,6 +39,7 @@ function Providers() {
                 <div className="card p-3" key={data.id}>
                     <div className='img-top'>
                         <img src={`${BACKEND_URL}/media/${data.image}`} alt="provider" height={200} />
+                        {console.log(data.image)}
                         </div>
                     
                     <p>Name: {data.provider}</p>
