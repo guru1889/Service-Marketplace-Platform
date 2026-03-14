@@ -7,6 +7,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.views.static import serve
+from django.urls import re_path
 
 urlpatterns = [
     path('register/',views.Register),
@@ -28,4 +30,6 @@ urlpatterns = [
     path('providerunavilability',views.provider_unavailability),
     path("get-provider-unavailable-dates/<int:provider_id>/",views.get_provider_unavailable_dates),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+]
