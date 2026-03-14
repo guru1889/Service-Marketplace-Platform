@@ -37,7 +37,7 @@ function Providers() {
                 providers.map((data) => (
                 <div className="card p-3" key={data.id}>
                     <div className='img-top'>
-                        <img src={`http://127.0.0.1:8000${data.image}`} alt="provider"  height={200}/></div>
+                        <img src={`${api}${data.image}`} alt="provider" height={200}/></div>
                     
                     <p>Name: {data.provider}</p>
                     <p>Service: {data.service}</p>
