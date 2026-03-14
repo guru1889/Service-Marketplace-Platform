@@ -47,7 +47,7 @@ function Filterprovider({ allProviders = [], setProviders }) {
   }
 
   return (
-    <div className='filter p-2 bg-warning d-flex justify-content-between '>
+    <div className='filter flex-wrap p-2 bg-warning d-flex justify-content-between '>
       <div className='btn-group'>
         <input
           type="text"
