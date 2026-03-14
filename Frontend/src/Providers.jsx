@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import api from './api';
 import Filterprovider from './Filterprovider';
+const BACKEND_URL = "https://local-service-platform-808d.onrender.com";
 function Providers() {
     const [providers,setProviders]=useState([]);
     const [allProviders, setAllProviders] = useState([]);
@@ -37,7 +38,8 @@ function Providers() {
                 providers.map((data) => (
                 <div className="card p-3" key={data.id}>
                     <div className='img-top'>
-                        <img src={`${api}${data.image}`} alt="provider" height={200}/></div>
+                        <img src={`${BACKEND_URL}/media/${data.image}`} alt="provider" height={200} />
+                        </div>
                     
                     <p>Name: {data.provider}</p>
                     <p>Service: {data.service}</p>
