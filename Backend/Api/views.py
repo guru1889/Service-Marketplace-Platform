@@ -15,7 +15,7 @@ from rest_framework import status
 
 # Create your views here.
 
-
+#api for user Registration
 @api_view(['POST'])
 def Register(request):
 
@@ -25,7 +25,7 @@ def Register(request):
         return Response({"message": "register successful"},status=201)
     return Response(serializer.errors, status=400)
 
-
+#login api
 @api_view(['POST'])
 def Login(request):
 
@@ -64,6 +64,7 @@ def Login(request):
         "profile": profile_data
     })
 
+#api for providrers in user dashboard
 @api_view(['GET'])
 @permission_classes([IsAuthenticated,IsCustomer])
 def providerapi(request):
@@ -71,6 +72,7 @@ def providerapi(request):
     provider=Providers_serializer(all_data,many=True).data
     return Response(provider)
 
+#api for provider registration
 @api_view(["POST"])
 def providerRegister(request):
     serializer = ProviderRegistrationSerializer(data=request.data)
@@ -82,11 +84,13 @@ def providerRegister(request):
     serializer.save()
     return Response({"message": "Registration successful"}, status=201)
 
+# api for categories shows
 @api_view(['GET'])
 def getserviceCategory(request):
     category=Services.objects.values("category")
     return Response(category)
 
+#api for provider by id
 @api_view(['GET'])
 @permission_classes([IsAuthenticated, IsCustomer])
 def getprovider(request, id):
@@ -94,6 +98,7 @@ def getprovider(request, id):
     serializer = Providers_serializer(provider)
     return Response(serializer.data)
 
+# api for booking slot
 @api_view(['GET'])
 def getBookedSlots(request, provider_id, date):
 
@@ -109,7 +114,7 @@ def getBookedSlots(request, provider_id, date):
 
     return Response(booked_times)
 
-
+# api for booking of user
 @api_view(['GET'])
 @permission_classes([IsAuthenticated,IsCustomer])
 def appointmentbyuser(request):
@@ -118,7 +123,7 @@ def appointmentbyuser(request):
     return Response(serializer.data)
 
 
-
+#api for service booking 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated,IsCustomer])
 def bookappointment(request):
@@ -170,7 +175,7 @@ def bookappointment(request):
         status=201
     )
 
-
+#bservise booking by providers
 @api_view(['GET'])
 @permission_classes([IsAuthenticated,IsServiceProvider])
 def providerdashboard(request):
@@ -178,6 +183,7 @@ def providerdashboard(request):
     serializer=BookingSerializer(bookings,many=True)
     return Response(serializer.data)
 
+#provider change the status
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated,IsServiceProvider])
 def changeWorkstatus(request,id,status):
@@ -186,6 +192,7 @@ def changeWorkstatus(request,id,status):
     booking.save()
     return Response({'message':'status updated successful'})
 
+#api for  unapproved providers to admin pannel
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 
@@ -194,6 +201,7 @@ def unapprovedproviderforadmin(request):
     serializer=UnapprovedProviderSerializer(unapprovedprovider,many=True)
     return Response(serializer.data)
 
+# api for providerapproved by admin
 @api_view(['POST'])
 @permission_classes([IsAuthenticated, IsAdmin])
 def giveapproved(request, id):
@@ -205,7 +213,7 @@ def giveapproved(request, id):
     except Provider.DoesNotExist:
         return Response({'error': 'Provider not found'}, status=404)
 
-
+#api for admin  dashboard stats
 @api_view(['GET'])
 @permission_classes([IsAuthenticated, IsAdmin])
 def Admindashboardstats(request):
@@ -229,6 +237,8 @@ def Admindashboardstats(request):
         'approved_provider':approved_providers
     })
 
+
+# api provider declare the unavilability
 @api_view(['POST'])
 @permission_classes([IsAuthenticated, IsServiceProvider])
 def provider_unavailability(request):
@@ -246,6 +256,8 @@ def provider_unavailability(request):
 
     return Response(serializer.errors, status=400)
 
+
+#api for list of provider unavilability
 @api_view(['GET'])
 @permission_classes([IsAuthenticated, IsCustomer])
 def get_provider_unavailable_dates(request, provider_id):
